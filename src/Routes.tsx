@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack';
 
@@ -15,7 +15,12 @@ const { Navigator, Screen } = createStackNavigator();
 const Routes: React.FC = () => {
   return(
     <NavigationContainer>
-      <Navigator screenOptions={{ headerShown: false, cardStyle: { backgroundColor: '#f2f3f5' } }}>
+      <Navigator 
+        screenOptions={{ 
+          headerShown: true, 
+          cardStyle: { backgroundColor: '#f1f1f1' } 
+        }}>
+        
         <Screen
           name="Menu"
           component={Menu}
@@ -23,7 +28,7 @@ const Routes: React.FC = () => {
             headerShown: true,
             header: () => <Header />
           }}
-        />
+        ></Screen>
       </Navigator>
     </NavigationContainer>
   );
@@ -32,9 +37,12 @@ const Routes: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: '#3f0a1a',
+    //backgroundColor: '#7a1533',
+    //backgroundColor: '#cf2558',
+    //backgroundColor: '#cf423b',
+    //backgroundColor: '#fc7d4a',
+    //backgroundColor: '#ffd463',
   },
 });
   
