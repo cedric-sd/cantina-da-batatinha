@@ -32,6 +32,22 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 16
   },
+  //title view
+  titleView: {
+    justifyContent: "center",
+    alignItems: "center",
+    flex: 1,
+    marginLeft: -25
+  },
+  textTitle: {
+    fontSize: 20,
+    fontWeight: "bold",
+    color: '#3f0a1a'
+  },
+  textSubtitle: {
+    fontWeight: "bold",
+    color: 'gray'
+  }
 });
 
 export default styles;

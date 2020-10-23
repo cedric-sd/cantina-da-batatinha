@@ -8,7 +8,7 @@ import Header from './components/Header';
 
 //screens
 import Menu from './screens/Menu';
-
+import Dish from './screens/Dish';
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -16,19 +16,32 @@ const Routes: React.FC = () => {
   return(
     <NavigationContainer>
       <Navigator 
+        initialRouteName="Menu"
         screenOptions={{ 
           headerShown: true, 
           cardStyle: { backgroundColor: '#f1f1f1' } 
         }}>
-        
+
         <Screen
           name="Menu"
           component={Menu}
           options={{
+            title: 'Menu',
             headerShown: true,
-            header: () => <Header />
+            header: (props) => <Header title="" subtitle="" showSearchInput={true}  {...props} />
           }}
-        ></Screen>
+        />
+
+        <Screen
+          name="Dish"
+          component={Dish}
+          options={{
+            title: 'Dish',
+            headerShown: true,
+            header: (props) => <Header title="Monte seu prato!" subtitle="tematico do dia" showSearchInput={false} {...props}/>
+          }}
+        />
+        
       </Navigator>
     </NavigationContainer>
   );
@@ -43,7 +56,7 @@ const styles = StyleSheet.create({
     //backgroundColor: '#cf423b',
     //backgroundColor: '#fc7d4a',
     //backgroundColor: '#ffd463',
-    //backgroundColor: '#7e7e7e',
+    //backgroundColor: '#e6e6e6',
   },
 });
   
