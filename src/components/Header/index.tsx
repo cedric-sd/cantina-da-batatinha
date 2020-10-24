@@ -28,31 +28,40 @@ const Header = ({ title, subtitle, showSearchInput }: HeaderProps) => {
         barStyle={'dark-content'}
       />
 
-      <BorderlessButton onPress={handleGoBack}>  
-        <FontAwesome5 
-          name="angle-left" 
-          size={30} 
-          color="#cf2558" 
-        />
-      </BorderlessButton>
       { showSearchInput ? 
         (
-          <TextInput
-            style={styles.inputSearch}
-            placeholder='O que está procurando?'
-            // onChangeText={text => onChangeText(text)}
-            //value={}
-          />
+          <View
+            style={styles.inputSearch} >
+            <TextInput
+              style={styles.inputSearchText}
+              placeholder='O que está procurando?'
+              // onChangeText={text => onChangeText(text)}
+              //value={}
+            ></TextInput>
+            <FontAwesome5 
+              name="search" 
+              size={20} 
+              color="gray" />
+          </View>
         ) : 
         (
-          <View style={styles.titleView}>
-            <Text style={styles.textTitle}>
-              {title}
-            </Text>
-            <Text style={styles.textSubtitle}>
-              {subtitle}
-            </Text>
-          </View>
+          <>
+            <BorderlessButton onPress={handleGoBack}>  
+              <FontAwesome5 
+                name="angle-left" 
+                size={30} 
+                color="#cf2558" 
+              />
+            </BorderlessButton>
+            <View style={styles.titleView}>
+              <Text style={styles.textTitle}>
+                {title}
+              </Text>
+              <Text style={styles.textSubtitle}>
+                {subtitle}
+              </Text>
+            </View>
+          </>
         )
       }
 

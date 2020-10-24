@@ -33,6 +33,19 @@ const styles = StyleSheet.create({
   },
   dishDetail: {
     color: 'gray'
+  },
+  separatorDish: {
+    borderWidth: 0.8,
+    borderColor: '#7a1533',
+    marginRight: 30,
+    height: 80,
+    width: 1
+  },
+  separatorText: {
+    color: '#7a1533',
+    marginVertical: 3,
+    marginLeft: -7,
+    fontStyle: "italic"
   }
 });
 

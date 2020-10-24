@@ -5,7 +5,20 @@ import { useNavigation } from '@react-navigation/native';
 
 import styles from './styles';
 
-const ThematicDish = () => {
+interface ThematicDishesProps {
+  thematicTitle: string;
+  listDishes: dish[];
+  containPersonalized?: boolean;
+};
+
+interface dish {
+  id: number,
+  image: string,
+  title: string,
+  detail: string
+}
+
+const ThematicDish = ({ thematicTitle, listDishes, containPersonalized }: ThematicDishesProps) => {
   const navigation = useNavigation();
 
   const handleSelectedDish = () => {
@@ -15,59 +28,80 @@ const ThematicDish = () => {
   return (
     <View style={styles.thematicDishes} >
         <Text style={styles.thematicTitle}>
-          Noite do salgado
+          {thematicTitle}
         </Text>
         
+        {/*[TO DO] procurar uma forma de melhorar essa lista
+          • ScrollView se repete */}
         <ScrollView 
           showsHorizontalScrollIndicator={false}
           horizontal={true}
           style={styles.listDishes}>
-          <TouchableOpacity onPress={handleSelectedDish}>
-            <View style={styles.dish}>
-              <Image 
-                style={styles.dishImage}
-                source={require('../../../assets/images/coxinhas.jpg')} 
-              />
-              <Text style={styles.dishTitle}>Coxinha</Text>
-              <Text style={styles.dishDetail}>100 gramas</Text>
-            </View>
-          </TouchableOpacity>
 
-          <TouchableOpacity  onPress={handleSelectedDish}>
-            <View style={styles.dish}>
-              <Image 
-                style={styles.dishImage}
-                source={require('../../../assets/images/cachorro-quente.jpg')} 
-              />
-              <Text style={styles.dishTitle}>Cachorro-quente</Text>
-              <Text style={styles.dishDetail}>100 gramas</Text>
-              <Text style={styles.dishDetail}>1 unidade</Text>
-            </View>
-          </TouchableOpacity>
+          {containPersonalized ?
+            <ScrollView 
+              showsHorizontalScrollIndicator={false}
+              horizontal={true}
+              style={styles.listDishes}>
 
-          <TouchableOpacity onPress={handleSelectedDish}>
-            <View style={styles.dish}>
-              <Image 
-                style={styles.dishImage}
-                source={require('../../../assets/images/pastel.jpg')} 
-              />
-              <Text style={styles.dishTitle}>Pastel</Text>
-              <Text style={styles.dishDetail}>100 gramas</Text>
-            </View>
-          </TouchableOpacity>
-          
-          <TouchableOpacity onPress={handleSelectedDish}>
-            <View style={styles.dish}>
-              <Image 
-                style={styles.dishImage}
-                source={require('../../../assets/images/torta.jpg')} 
-              />
-              <Text style={styles.dishTitle}>Torta</Text>
-              <Text style={styles.dishDetail}>100 gramas</Text>
-            </View>
-          </TouchableOpacity>
-          
+              <TouchableOpacity
+                onPress={handleSelectedDish}>
+                <View style={styles.dish}>
+                  <Image 
+                    style={styles.dishImage}
+                    source={{ uri: "https://cdn.guiadacozinha.com.br/wp-content/uploads/2020/07/WhatsApp-Image-2020-07-08-at-15.22.35.jpeg" }} 
+                  />
+                  <Text style={styles.dishTitle}>Personalizado</Text>
+                  <Text style={styles.dishDetail}>Montar meu prato</Text>
+                </View>
+              </TouchableOpacity>
+              <View>
+                <View style={styles.separatorDish}></View>
+                <Text style={styles.separatorText}>ou</Text>
+                <View style={styles.separatorDish}></View>
+                {/* <Image
+                  style={styles.separatorDish}
+                  source={require("../../../assets/images/separator.jpg")}
+                /> */}
+              </View>
+              {listDishes.map((dish: dish) => {
+                return (
+                  <TouchableOpacity 
+                    key={dish.id}
+                    onPress={handleSelectedDish}>
+                    <View style={styles.dish}>
+                      <Image 
+                        style={styles.dishImage}
+                        source={{ uri: dish.image }} 
+                      />
+                      <Text style={styles.dishTitle}>{dish.title}</Text>
+                      <Text style={styles.dishDetail}>{dish.detail}</Text>
+                    </View>
+                  </TouchableOpacity>
+                )
+              })}
+            </ScrollView>   
+             :
+            //list of dishes
+            listDishes.map((dish: dish) => {
+              return (
+                <TouchableOpacity 
+                  key={dish.id}
+                  onPress={handleSelectedDish}>
+                  <View style={styles.dish}>
+                    <Image 
+                      style={styles.dishImage}
+                      source={{ uri: dish.image }} 
+                    />
+                    <Text style={styles.dishTitle}>{dish.title}</Text>
+                    <Text style={styles.dishDetail}>{dish.detail}</Text>
+                  </View>
+                </TouchableOpacity>
+              )
+            })
+          }
         </ScrollView>
+
       </View>
   );
 }

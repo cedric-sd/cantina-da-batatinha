@@ -6,6 +6,63 @@ import ThematicDish from '../../components/ThematicDish';
 
 import styles from './styles';
 
+const cardapioDia = {
+  "dish": [
+    {
+      "id": 1,
+      "image": "https://www.fmetropolitana.com.br/wp-content/uploads/2020/08/FEIJOADA_DIVULGA%C3%87%C3%83O.jpg",
+      "title": "Especial 1",
+      "detail": "1 unidade"
+    },
+    {
+      "id": 2,
+      "image": "https://i0.wp.com/www.spveg.com/blog/wp-content/uploads/2017/06/Mana-Kai-quibe.jpg?fit=700%2C525&ssl=1",
+      "title": "Especial 2",
+      "detail": "1 unidade"
+    },
+    {
+      "id": 3,
+      "image": "https://conteudo.imguol.com.br/c/noticias/e5/2016/07/06/prato-de-comida-refeicao-arroz-feijao-batata-frita-frango-e-salada-comida-tipica-do-brasileiro-prato-feito-pf-1467802726059_615x300.jpg",
+      "title": "Especial 3",
+      "detail": "1 unidade"
+    },
+    {
+      
+      "id": 4,
+      "image": "https://conteudo.imguol.com.br/c/entretenimento/55/2019/10/30/prato-com-comida-brasileira-arroz-feijao-bife-e-batata-frita-1572445930497_v2_450x337.jpg",
+      "title": "Especial 4",
+      "detail": "1 unidade"
+    },
+]};
+
+const noiteDoSalgado = {
+  "dish": [
+    {
+      "id": 1,
+      "image": "https://imagem.band.com.br/f_135746.jpg",
+      "title": "Coxinha",
+      "detail": "100 gramas"
+    },
+    {
+      "id": 2,
+      "image": "https://i.pinimg.com/564x/ba/16/7e/ba167e1881b538aed2cf3556705bd0b1.jpg",
+      "title": "Cachorro-quente",
+      "detail": "100 gramas"
+    },
+    {
+      "id": 3,
+      "image": "https://img.itdg.com.br/tdg/images/blog/uploads/2018/05/pastel-1.jpg?w=1200",
+      "title": "Pastel",
+      "detail": "100 gramas"
+    },
+    {
+      "id": 4,
+      "image": "https://www.grzero.com.br/wp-content/uploads/2018/06/abobrinha-11.jpg",
+      "title": "Torta",
+      "detail": "100 gramas"
+    }
+]};
+
 const Menu = () => {
   return (
     <View style={styles.container}>
@@ -48,8 +105,16 @@ const Menu = () => {
         </View>
       </View>
 
-      <ThematicDish></ThematicDish>
-      <ThematicDish></ThematicDish>
+      <ThematicDish 
+        thematicTitle="Cardapio do dia"
+        listDishes={cardapioDia.dish}
+        containPersonalized={true}
+      ></ThematicDish>
+
+      <ThematicDish 
+        thematicTitle="Noite do salgado"
+        listDishes={noiteDoSalgado.dish}
+      ></ThematicDish>
       
     </View>
   );

@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     //backgroundColor: '#cf423b',
     //backgroundColor: '#fc7d4a',
     //backgroundColor: '#ffd463',
-    //backgroundColor: '#e6e6e6',
+    //backgroundColor: '#aaaaaa',
   },
 });
   
