@@ -2,7 +2,20 @@ import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+  },
+  containerMethods: {
+    borderWidth: 1,
+    borderColor: '#ccc',
+    padding: 10,
+    borderRadius: 8,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems:"center"
+  },
+  buttonMethodDelivery: {
+    width: '35%',
+    marginLeft: 30,
   },
   optionsWrapper: {
     justifyContent: "center",
@@ -55,7 +68,7 @@ const styles = StyleSheet.create({
   optionValue: {
     fontWeight: "bold"
   },
-  //modal
+  //modal details
   containerModalBackground: {
     flex: 1,
     alignItems: 'center',
@@ -123,6 +136,139 @@ const styles = StyleSheet.create({
   labelDetailButton: {
     color: '#fff',
     fontWeight: 'bold'
+  },
+  priceSelect: {
+    flexDirection: "row",
+    alignItems: "center"
+  },
+  fabButton: {
+    position: 'absolute',
+    margin: 30,
+    right: 0,
+    bottom: 0,
+    borderRadius: 50
+  },
+  fab: {
+    backgroundColor: '#cf2558',
+    padding: 5,
+    borderRadius: 50
+  },
+  //modalize section
+  overlayModalize: {
+    top: -100,
+  },
+  handleModalize: {
+    backgroundColor: '#ccc',
+    width: 100
+  },
+  headerModalize: {
+    paddingHorizontal: 20,
+    paddingVertical: 25,
+    borderBottomWidth: 1,
+    borderBottomColor: '#ccc',
+
+    justifyContent: "space-between",
+    alignItems: "center",
+    flexDirection: "row",
+  },
+  headerModalizeTitle: {
+    flexDirection: "row"
+  },
+  headerModalizeText: {
+    marginHorizontal: 10,
+    fontSize: 20,
+    fontWeight: "bold",
+    color: '#cf2558'
+  },
+  modalModalize: {
+    borderTopStartRadius: 20,
+    borderTopEndRadius: 20,
+  },
+  clearOrderButton: {
+    backgroundColor: '#fc7d4a',
+    padding: 5,
+    paddingHorizontal: 20,
+    borderRadius: 20,
+  },
+  clearOrderText: {
+    color: '#fff'
+  },
+  //modal footer
+  modalFooter: {
+    backgroundColor: '#fff',
+    borderTopWidth: 1,
+    borderTopColor: "#ccc"
+  },
+  containerFooter: {
+    justifyContent: "space-between",
+    alignItems: "center",
+    flexDirection: "row",
+    marginHorizontal: 20,
+    marginVertical: 30,
+  },
+  textFooter: {
+    fontSize: 18,
+    fontWeight: "bold",
+    color: '#3f0a1a'
+  },
+  //order
+  itemOrder: {
+    justifyContent: "space-between",
+    alignItems: "center",
+    flexDirection: "row",
+
+    borderBottomWidth: 1,
+    borderStyle: 'dashed',
+    borderBottomColor: '#ccc',
+    paddingVertical: 10,
+    paddingHorizontal: 23,
+  },
+  orderLabelText: {
+    fontSize: 16,
+    fontWeight: "bold",
+    color: '#808080'
+  },
+  confirmOrderButton: {
+    backgroundColor: '#cf2558',
+    paddingVertical: 20,
+    marginHorizontal: 23,
+    borderRadius: 40,
+    elevation: 7,
+    marginBottom: 20,
+    alignItems:"center"
+  },
+  labelConfirmOrderButton: {
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: "bold"
+  },
+  //delivery method modal
+  modalDeliveryMethodWrapper: {
+    flex: 1,
+    bottom: 0,
+    justifyContent: "flex-end",
+    alignItems: "flex-end",
+    
+  },
+  modalDeliveryMethod: {
+    minWidth: '100%',
+    //minHeight: '70%',
+    
+    maxWidth: '100%',
+    maxHeight: '70%',
+    
+    paddingBottom: 20,
+    backgroundColor: '#fff'
+  },
+  headerDeliveryMethod: {
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 20,
+  },
+  headerDeliveryMethodText: {
+    fontSize: 18,
+    fontWeight: "bold",
+    color: '#3f0a1a'
   }
 });
 

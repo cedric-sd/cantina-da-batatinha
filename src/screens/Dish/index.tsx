@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { View, Text, Image, Modal } from 'react-native';
-import { FontAwesome, MaterialIcons } from '@expo/vector-icons';
+import { FontAwesome, Feather } from '@expo/vector-icons';
 
 import { BorderlessButton, RectButton, ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
+import { FAB, Checkbox } from 'react-native-paper';
+import { Modalize } from 'react-native-modalize'
 
 //components
-// import OptionDetail from '../../components/OptionDetail';
 import styles from './styles';
 
 //[TO DO] Consultar a api quando estiver pronta
@@ -109,13 +110,27 @@ interface listTag {
 }
 
 const Dish = () => {
+  const [checked, setChecked] = React.useState(false);
+
   const [isModalOpen, setModalOpen] = useState(false);
+  const [isModalDeliveryMethodOpen, setModalDeliveryMethod] = useState(false);
+  const modalizeRef = useRef<Modalize>(null);
+  //const modalizeDeliveryMethod = useRef<Modalize>(null);
+
+  const onOpen = () => {
+    modalizeRef.current?.open();
+  }
+
+  // const deliveryMethodOpen = () => {
+  //   modalizeDeliveryMethod.current?.open();
+  // }
 
   return(
-    <>
+    <View style={styles.container}>
       <ScrollView
         showsVerticalScrollIndicator={false}>
-          <View style={styles.container}>
+          <View>
+
             <Modal 
               transparent={true}
               visible={isModalOpen}
@@ -153,6 +168,61 @@ const Dish = () => {
                 
               </View>
             </Modal>
+
+            
+            <Modal 
+              transparent={true}
+              visible={isModalDeliveryMethodOpen}
+              statusBarTranslucent={true}
+              onRequestClose={()=>{setModalDeliveryMethod(false)}} >
+              <View style={styles.containerModalBackground}>
+                {/* <View style={styles.iconCloseWrapper}>
+                  <TouchableOpacity>
+                    <FontAwesome 
+                      onPress={() => {setModalDeliveryMethod(false)}}
+                      name="close" 
+                      size={30} 
+                      color="white" />
+                  </TouchableOpacity>
+                  
+                </View> */}
+                <View style={styles.modalDeliveryMethodWrapper}>
+                  <View style={styles.modalDeliveryMethod}>
+
+                    <View style={styles.headerDeliveryMethod}>
+                      <Text style={styles.headerDeliveryMethodText}>Como deseja receber seu pedido?</Text>
+                    </View>
+                    
+                    <View>
+                      <Text>Entrega no endereço</Text>
+                      <Text>Entregamos no seu endereço</Text>
+                    </View>
+                    <View>
+                      <Text>Retirada no local</Text>
+                      <Text>Você retira no local</Text>
+                    </View>
+                    
+                    <View>
+                      <RectButton>
+                        <Text>Confirmar entrega</Text>
+                      </RectButton>
+                    </View>
+                  </View>
+                </View>
+                
+              </View>
+            </Modal>
+
+            <RectButton 
+              rippleColor='#ddd'
+              style={styles.buttonMethodDelivery}
+              onPress={() => {setModalDeliveryMethod(true)}}>
+              <View style={styles.containerMethods}>
+                  <Feather name="truck" size={20} color="#aaa" />
+                  <Text>Entrega</Text>
+                  <Feather name="chevron-down" size={20} color="#cf2558" />
+              </View>
+            </RectButton>
 
             { (data.group.length > 0) ?
               
@@ -193,10 +263,16 @@ const Dish = () => {
                                 })}
                               </View>
                             </View>
-                            <View>
+                            <View style={styles.priceSelect}>
                               <Text style={styles.optionValue}>
-                                R$ {option.price.toPrecision(3)} #
+                                R$ {option.price.toPrecision(3)}
                               </Text>
+                              <Checkbox
+                                status={checked ? 'checked' : 'unchecked'}
+                                onPress={() => {
+                                  setChecked(!checked);
+                                }}
+                              />
                             </View>
                           </View>
                         </RectButton>
@@ -214,7 +290,91 @@ const Dish = () => {
         </View>
       </ScrollView>
       {/* <OptionDetail></OptionDetail> */}
-    </>
+      
+      <RectButton
+        rippleColor="#ddd"
+        style={styles.fabButton}>
+        <FAB 
+          style={styles.fab}
+          color= '#fff'
+          icon="shopping-bag"
+          onPress={onOpen}
+        />
+      </RectButton>
+
+      <Modalize 
+        ref={modalizeRef}
+        //modalHeight={300}
+        //modalTopOffset={100}
+        adjustToContentHeight={true}
+        handlePosition="inside"
+        overlayStyle={styles.overlayModalize}
+        modalStyle={styles.modalModalize}
+        handleStyle={styles.handleModalize}
+        HeaderComponent={
+          <View style={styles.headerModalize}>
+            <View style={styles.headerModalizeTitle}>
+              <Feather name="shopping-bag" size={24} color="#cf2558" />
+              <Text style={styles.headerModalizeText}>Meu pedido</Text>
+            </View>
+            {/* <RectButton
+              rippleColor="#ddd"
+              style={styles.clearOrderButton}
+            >
+              <Text style={styles.clearOrderText}>Limpar</Text>
+            </RectButton> */}
+          </View>
+        }
+        FloatingComponent={
+          <View style={styles.modalFooter}>
+            <View style={styles.containerFooter}>
+              <Text style={styles.textFooter}>Total</Text>
+              <Text style={styles.textFooter}>R$ 25.00</Text>
+            </View>
+
+            <RectButton
+              rippleColor="#ddd"
+              style={styles.confirmOrderButton}
+            >
+              <Text style={styles.labelConfirmOrderButton}>Confirmar pedido</Text>
+            </RectButton>
+          </View>
+        }
+      >
+        <View>
+          <View style={styles.itemOrder}>
+            <View>
+              <Text style={styles.orderLabelText}>Tamanho (P)</Text>
+              <Text>100 g</Text>
+            </View>
+            <View>
+              <Text style={styles.orderLabelText}>R$ 3.50</Text>
+            </View>
+          </View>
+
+          <View style={styles.itemOrder}>
+            <View>
+              <Text style={styles.orderLabelText}>Farofa</Text>
+              <Text>100 g</Text>
+            </View>
+            <View>
+              <Text style={styles.orderLabelText}>R$ 3.50</Text>
+            </View>
+          </View>
+          
+          <View style={styles.itemOrder}>
+            <View>
+              <Text style={styles.orderLabelText}>Refrigerante</Text>
+              <Text>100 g</Text>
+            </View>
+            <View>
+              <Text style={styles.orderLabelText}>R$ 3.50</Text>
+            </View>
+          </View>
+        </View>
+      </Modalize>
+      
+    </View>
   );
 }
 
