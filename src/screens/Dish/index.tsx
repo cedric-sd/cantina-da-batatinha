@@ -1,14 +1,14 @@
 import React, { useState, useRef } from 'react';
 import { View, Text, Image, Modal } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import { FontAwesome, Feather } from '@expo/vector-icons';
 
 import { BorderlessButton, RectButton, ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
-import { FAB, Checkbox } from 'react-native-paper';
+import { FAB, Checkbox, RadioButton } from 'react-native-paper';
 import { Modalize } from 'react-native-modalize'
 
 //components
 import styles from './styles';
-
 //[TO DO] Consultar a api quando estiver pronta
 const data = {
   "group": [
@@ -110,12 +110,19 @@ interface listTag {
 }
 
 const Dish = () => {
-  const [checked, setChecked] = React.useState(false);
+  const navigation = useNavigation();
+
+  const [isCheckedItemOption, setCheckedItemOption] = React.useState(false);
+  const [isCheckedDeliveryMethod, setCheckedDeliveryMethod] = React.useState('first');
 
   const [isModalOpen, setModalOpen] = useState(false);
   const [isModalDeliveryMethodOpen, setModalDeliveryMethod] = useState(false);
   const modalizeRef = useRef<Modalize>(null);
   //const modalizeDeliveryMethod = useRef<Modalize>(null);
+
+  const handleConfirmOrder = () => {
+    navigation.navigate('Delivery');
+  }
 
   const onOpen = () => {
     modalizeRef.current?.open();
@@ -171,42 +178,63 @@ const Dish = () => {
 
             
             <Modal 
+              animationType="fade"
               transparent={true}
               visible={isModalDeliveryMethodOpen}
               statusBarTranslucent={true}
-              onRequestClose={()=>{setModalDeliveryMethod(false)}} >
+              onRequestClose={()=>{setModalDeliveryMethod(false)}} 
+            >
               <View style={styles.containerModalBackground}>
-                {/* <View style={styles.iconCloseWrapper}>
-                  <TouchableOpacity>
-                    <FontAwesome 
-                      onPress={() => {setModalDeliveryMethod(false)}}
-                      name="close" 
-                      size={30} 
-                      color="white" />
-                  </TouchableOpacity>
-                  
-                </View> */}
+
                 <View style={styles.modalDeliveryMethodWrapper}>
                   <View style={styles.modalDeliveryMethod}>
 
                     <View style={styles.headerDeliveryMethod}>
                       <Text style={styles.headerDeliveryMethodText}>Como deseja receber seu pedido?</Text>
                     </View>
-                    
                     <View>
-                      <Text>Entrega no endereço</Text>
-                      <Text>Entregamos no seu endereço</Text>
+                      <View style={styles.optionDeliveryMethod}>
+                        <View style={styles.labelOptionDeliveryMethod}>
+                          <Feather name="truck" size={24} color="black" />
+                        
+                          <View style={styles.optionDeliveryMethodWrapIcon}>
+                            <Text style={styles.textDeliveryMethod}>Entrega no endereço</Text>
+                            <Text>Entregamos no seu endereço</Text>
+                          </View>
+
+                        </View>
+                        <RadioButton
+                          value="first"
+                          status={ isCheckedDeliveryMethod === 'first' ? 'checked' : 'unchecked' }
+                          onPress={() => setCheckedDeliveryMethod('first')}
+                        />
+                      </View>
+                      <View style={styles.optionDeliveryMethod}>
+                        <View style={styles.labelOptionDeliveryMethod}>
+                          <Feather name="map-pin" size={24} color="black" />
+
+                          <View style={styles.optionDeliveryMethodWrapIcon}>
+                            <Text style={styles.textDeliveryMethod}>Retirada no local</Text>
+                            <Text>Você retira no local</Text>
+                          </View>        
+
+                        </View>
+                        <RadioButton
+                          value="second"
+                          status={ isCheckedDeliveryMethod === 'second' ? 'checked' : 'unchecked' }
+                          onPress={() => setCheckedDeliveryMethod('second')}
+                        />
+                      </View>
                     </View>
-                    <View>
-                      <Text>Retirada no local</Text>
-                      <Text>Você retira no local</Text>
-                    </View>
-                    
-                    <View>
-                      <RectButton>
-                        <Text>Confirmar entrega</Text>
-                      </RectButton>
-                    </View>
+                    <RectButton
+                      rippleColor='#ddd'
+                      style={styles.confirmDeliveryMethod}>
+                      <Text 
+                        style={styles.labelDeliveryMethod}
+                        onPress={()=>{setModalDeliveryMethod(false)}}>
+                        Confirmar forma de entrega
+                      </Text>
+                    </RectButton>
                   </View>
                 </View>
                 
@@ -268,9 +296,9 @@ const Dish = () => {
                                 R$ {option.price.toPrecision(3)}
                               </Text>
                               <Checkbox
-                                status={checked ? 'checked' : 'unchecked'}
+                                status={isCheckedItemOption ? 'checked' : 'unchecked'}
                                 onPress={() => {
-                                  setChecked(!checked);
+                                  setCheckedItemOption(!isCheckedItemOption);
                                 }}
                               />
                             </View>
@@ -335,8 +363,10 @@ const Dish = () => {
             <RectButton
               rippleColor="#ddd"
               style={styles.confirmOrderButton}
+              onPress={handleConfirmOrder}
             >
-              <Text style={styles.labelConfirmOrderButton}>Confirmar pedido</Text>
+              <Text 
+                style={styles.labelConfirmOrderButton}>Confirmar pedido</Text>
             </RectButton>
           </View>
         }

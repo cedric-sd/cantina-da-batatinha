@@ -8,7 +8,6 @@ const styles = StyleSheet.create({
     marginVertical: 15,
     paddingHorizontal: 30,
     backgroundColor: '#f1f1f1',
-    
   },
   arrowLeft: {
   },

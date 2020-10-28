@@ -9,6 +9,8 @@ import Header from './components/Header';
 //screens
 import Menu from './screens/Menu';
 import Dish from './screens/Dish';
+import Delivery from './screens/Delivery';
+import PersonalData from './screens/PersonalData';
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -39,6 +41,26 @@ const Routes: React.FC = () => {
             title: 'Dish',
             headerShown: true,
             header: (props) => <Header title="Monte seu prato!" subtitle="tematico do dia" showSearchInput={false} {...props}/>
+          }}
+        />
+        
+        <Screen
+          name="Delivery"
+          component={Delivery}
+          options={{
+            title: 'Delivery',
+            headerShown: false,
+            //header: (props) => <Header title="Onde será entregue?" subtitle="meu endereço" showSearchInput={false} {...props}/>
+          }}
+        />
+        
+        <Screen
+          name="PersonalData"
+          component={PersonalData}
+          options={{
+            title: 'PersonalData',
+            headerShown: true,
+            header: (props) => <Header title="Quem receberá?" subtitle="meus dados" showSearchInput={false} {...props}/>
           }}
         />
         

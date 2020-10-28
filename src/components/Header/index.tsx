@@ -24,7 +24,7 @@ const Header = ({ title, subtitle, showSearchInput }: HeaderProps) => {
     <View style={styles.container}>
       <StatusBar 
         //translucent={true} 
-        backgroundColor={'#f1f1f1'} 
+        backgroundColor='#f1f1f1'
         barStyle={'dark-content'}
       />
 
@@ -43,7 +43,7 @@ const Header = ({ title, subtitle, showSearchInput }: HeaderProps) => {
               size={20} 
               color="gray" />
           </View>
-        ) : 
+        ) :
         (
           <>
             <BorderlessButton onPress={handleGoBack}>  

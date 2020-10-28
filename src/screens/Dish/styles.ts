@@ -269,7 +269,40 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
     color: '#3f0a1a'
-  }
+  },
+  optionDeliveryMethod: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    margin: 20
+  },
+  labelOptionDeliveryMethod: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
+  },
+  optionDeliveryMethodWrapIcon: {
+    marginLeft: 20
+  },
+  textDeliveryMethod: {
+    color: '#3f0a1a',
+    fontSize: 16,
+    fontWeight: "bold"
+  },
+  
+  confirmDeliveryMethod: {
+    backgroundColor: '#cf2558',
+    paddingVertical: 20,
+    margin: 20,
+    borderRadius: 40,
+    elevation: 7,
+    alignItems:"center"
+  },
+  labelDeliveryMethod: {
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: "bold"
+  },
 });
 
 export default styles;
