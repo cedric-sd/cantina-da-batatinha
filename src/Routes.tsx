@@ -11,6 +11,7 @@ import Menu from './screens/Menu';
 import Dish from './screens/Dish';
 import Delivery from './screens/Delivery';
 import PersonalData from './screens/PersonalData';
+import Success from './screens/Success';
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -64,6 +65,16 @@ const Routes: React.FC = () => {
           }}
         />
         
+        <Screen
+          name="Success"
+          component={Success}
+          options={{
+            title: 'Success',
+            headerShown: false,
+            //header: (props) => <Header title="Quem receberá?" subtitle="meus dados" showSearchInput={false} {...props}/>
+          }}
+        />
+
       </Navigator>
     </NavigationContainer>
   );
