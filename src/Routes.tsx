@@ -2,6 +2,9 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 
 //components
 import Header from './components/Header';
@@ -12,8 +15,42 @@ import Dish from './screens/Dish';
 import Delivery from './screens/Delivery';
 import PersonalData from './screens/PersonalData';
 import Success from './screens/Success';
+import UserPerfil from './screens/User/Perfil';
+import UserHistoric from './screens/User/Historic';
 
 const { Navigator, Screen } = createStackNavigator();
+//const Tab = createMaterialTopTabNavigator();
+//const Tab = createBottomTabNavigator();
+const Tab = createMaterialBottomTabNavigator();
+
+const TabNavigationUser = () => {
+  return (
+    <Tab.Navigator
+      barStyle={{ backgroundColor: '#7a1533' }}
+    >
+
+      <Tab.Screen 
+        name="Menu" 
+        component={Menu}
+        options={{ 
+          tabBarLabel: 'Menu',
+        }}
+      />
+
+      <Tab.Screen
+        name="UserHistoric"
+        component={UserHistoric}
+        options={{ tabBarLabel: 'Histórico' }}
+      />
+
+      <Tab.Screen 
+        name="UserPerfil" 
+        component={UserPerfil}
+        options={{ tabBarLabel: 'Perfil' }}
+      />
+    </Tab.Navigator>
+  );
+}
 
 const Routes: React.FC = () => {
   return(
@@ -24,10 +61,10 @@ const Routes: React.FC = () => {
           headerShown: true, 
           cardStyle: { backgroundColor: '#f1f1f1' } 
         }}>
-
+        
         <Screen
           name="Menu"
-          component={Menu}
+          component={TabNavigationUser}
           options={{
             title: 'Menu',
             headerShown: true,
