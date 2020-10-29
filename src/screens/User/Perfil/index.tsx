@@ -5,7 +5,7 @@ import styles from './styles';
 
 const Perfil = () => {
   return (
-    <View>
+    <View style={styles.container}>
       <Text>User Perfil</Text>
     </View>
   );

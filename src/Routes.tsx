@@ -67,8 +67,8 @@ const Routes: React.FC = () => {
           component={TabNavigationUser}
           options={{
             title: 'Menu',
-            headerShown: true,
-            header: (props) => <Header title="" subtitle="" showSearchInput={true}  {...props} />
+            headerShown: false,
+            //header: (props) => <Header title="" subtitle="" showSearchInput={true}  {...props} />
           }}
         />
 
