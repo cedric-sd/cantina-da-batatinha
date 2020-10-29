@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
     //backgroundColor: '#cf423b',
     //backgroundColor: '#fc7d4a',
     //backgroundColor: '#ffd463',
-    //backgroundColor: '#aaaaaa',
+    //backgroundColor: '#b6ebce',
   },
 });
   
