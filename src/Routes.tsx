@@ -5,6 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import { Feather, FontAwesome5 } from '@expo/vector-icons';
 
 //components
 import Header from './components/Header';
@@ -34,19 +35,38 @@ const TabNavigationUser = () => {
         component={Menu}
         options={{ 
           tabBarLabel: 'Menu',
+          tabBarIcon: ((props) => {
+            return (
+              <Feather name="home" size={24} color="#fff" />
+            );
+          })
         }}
       />
 
       <Tab.Screen
         name="UserHistoric"
         component={UserHistoric}
-        options={{ tabBarLabel: 'Histórico' }}
+        options={{ 
+          tabBarLabel: 'Histórico',
+          tabBarIcon: ((props) => {
+            return (
+              <Feather name="book-open" size={24} color="#fff" />
+            );
+          })
+        }}
       />
 
       <Tab.Screen 
         name="UserPerfil" 
         component={UserPerfil}
-        options={{ tabBarLabel: 'Perfil' }}
+        options={{ 
+          tabBarLabel: 'Perfil',
+          tabBarIcon: ((props) => {
+            return (
+              <Feather name="heart" size={24} color="#fff" />
+            );
+          })
+         }}
       />
     </Tab.Navigator>
   );
@@ -126,7 +146,7 @@ const styles = StyleSheet.create({
     //backgroundColor: '#cf423b',
     //backgroundColor: '#fc7d4a',
     //backgroundColor: '#ffd463',
-    //backgroundColor: '#b6ebce',
+    //backgroundColor: '#eeb628',
   },
 });
   

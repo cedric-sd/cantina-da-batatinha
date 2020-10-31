@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, Image, ScrollView } from 'react-native';
+import { Text, View, Image, ScrollView, TextInput, StatusBar } from 'react-native';
 import { FontAwesome5, FontAwesome } from '@expo/vector-icons';
 
 import ThematicDish from '../../components/ThematicDish';
@@ -66,7 +66,28 @@ const noiteDoSalgado = {
 const Menu = () => {
   return (
     <View style={styles.container}>
-      
+      <View style={styles.headerWrapper}>
+        <StatusBar 
+          //translucent={true} 
+          backgroundColor='#f1f1f1'
+          barStyle={'dark-content'}
+        />
+
+        <View
+          style={styles.inputSearch} >
+          <TextInput
+            style={styles.inputSearchText}
+            placeholder='O que está procurando?'
+            // onChangeText={text => onChangeText(text)}
+            //value={}
+          ></TextInput>
+          <FontAwesome5 
+            name="search" 
+            size={20} 
+            color="gray" />
+        </View>
+      </View>
+
       <View style={styles.dishTypesWrapper}>
         <View style={styles.dishType}>
           <View style={styles.dishTypeImage}>

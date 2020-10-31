@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, TextInput, StatusBar } from 'react-native';
 import { BorderlessButton } from 'react-native-gesture-handler';
-import { FontAwesome5 } from '@expo/vector-icons';
+import { Feather } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { StackHeaderProps } from '@react-navigation/stack';
 
@@ -38,20 +38,12 @@ const Header = ({ title, subtitle, showSearchInput }: HeaderProps) => {
               // onChangeText={text => onChangeText(text)}
               //value={}
             ></TextInput>
-            <FontAwesome5 
-              name="search" 
-              size={20} 
-              color="gray" />
           </View>
         ) :
         (
           <>
-            <BorderlessButton onPress={handleGoBack}>  
-              <FontAwesome5 
-                name="angle-left" 
-                size={30} 
-                color="#cf2558" 
-              />
+            <BorderlessButton onPress={handleGoBack}>
+            <Feather name="arrow-left" size={30} color="#cf2558" />
             </BorderlessButton>
             <View style={styles.titleView}>
               <Text style={styles.textTitle}>
