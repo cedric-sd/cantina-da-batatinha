@@ -51,6 +51,56 @@ const styles = StyleSheet.create({
   labelPrice: {
     fontWeight: 'bold',
     fontSize: 16
+  },
+  avatarImg: {
+    backgroundColor: '#ddd',
+    width: 70,
+    height: 70,
+    marginLeft: -25,
+    marginBottom: -100,
+    borderRadius: 100,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  titleModalWrapper: {
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "row",
+    marginTop: 60,
+  },
+  titleModal: {
+    fontSize: 24,
+    fontWeight: "bold",
+    marginLeft: 15
+  },
+  containerOrder: {
+    flex: 1,
+    marginHorizontal: 20,
+    marginTop: 10,
+    backgroundColor: '#fff',
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: '#cf2558'
+  },
+  optionOrder: {
+    borderBottomWidth: 1,
+    borderBottomColor: '#cf2558'
+  },
+  totalOrder: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    padding: 10
+  },
+  buttonFooter: {
+    position: "absolute",
+    bottom: 0,
+    justifyContent: "center",
+    alignItems: "center",
+    width: '100%',
+    paddingVertical: 20,
+    borderTopWidth: 1,
+    borderTopColor: '#CF2558'
   }
 });
 
