@@ -62,25 +62,45 @@ const Historic = () => {
 
           <View style={styles.containerOrder}>
             <View style={styles.optionOrder}>
-              <View>
+              <View style={styles.optionOrderTop}>
                 <Text>Pequeno</Text>
                 <Text>20/15</Text>
               </View>
-              <View>
-                <Text>+ Pernil assado</Text>
-                <Text>+ Arroz</Text>
+              <View style={styles.optionOrderTop}>
+                <View>
+                  <Text>+ Pernil assado</Text>
+                  <Text>+ Arroz</Text>
+                </View>
+                <View>
+                  <Text>100 g</Text>
+                  <Text>100 g</Text>
+                </View>
               </View>
             </View>
-            <View style={styles.optionOrder}>
-              <View>
-                <Text>Pequeno</Text>
-                <Text>20/15</Text>
+            
+            <View style={styles.addressWrapper}>
+              <View style={styles.addressRow}>
+                <Text style={styles.textTitleAddress}>Endereço</Text>
+                {/* <BorderlessButton>
+                  <Feather name="edit" size={24} color="#cf423b" />
+                </BorderlessButton> */}
               </View>
-              <View>
-                <Text>+ Pernil assado</Text>
-                <Text>+ Arroz</Text>
+              
+              <View style={styles.addressRow}>
+                <Text style={styles.textAddress}>CEP: 00000-000</Text>
+              </View>
+              
+              <View style={styles.addressRow}>
+                <Text style={styles.textAddress}>Rua: Rua das flores</Text>
+                <Text style={styles.textAddress}>Numero: 10</Text>
+              </View>
+              
+              <View style={styles.addressRow}>
+                <Text style={styles.textAddress}>Bairro: Bairro fg</Text>
+                <Text style={styles.textAddress}>Compelemento: ?</Text>
               </View>
             </View>
+
             <View style={styles.totalOrder}>
               <Text>Total</Text>
               <Text>R$ 20,00</Text>

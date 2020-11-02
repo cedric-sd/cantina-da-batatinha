@@ -86,6 +86,12 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: '#cf2558'
   },
+  optionOrderTop: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginHorizontal: 20,
+    marginVertical: 5
+  },
   totalOrder: {
     flexDirection: "row",
     justifyContent: "space-between",
@@ -101,7 +107,28 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
     borderTopWidth: 1,
     borderTopColor: '#CF2558'
-  }
+  },
+  addressWrapper: {
+    marginHorizontal: 30,
+    paddingVertical: 20,
+    borderBottomWidth: 1,
+    borderBottomColor: '#ccc',
+  },
+  addressRow: {
+    flexDirection: 'row',
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginVertical: 5,
+  },
+  textTitleAddress: {
+    fontWeight: "bold",
+    fontSize: 18,
+    color: '#3f0a1a'
+  },
+  textAddress: {
+    fontWeight: "bold",
+    color: '#808080'
+  },
 });
 
 export default styles;
