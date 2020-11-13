@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
   iconOptionTitle: {
     flexDirection: "row",
   },
-  optionButton: {
+  option: {
     backgroundColor: '#fff',
     borderRadius: 8,
 
@@ -43,13 +43,14 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.8,
     shadowOffset: { width: 0, height: 5 },
     elevation: 1,
-  },
-  option: {
-    padding: 20,
-
+    
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems:"center",
+  },
+  detailOption: {
+    padding: 20,
+    marginRight: '30%'
   },
   optionDescriptionTitle: {
     fontSize: 16,
@@ -139,7 +140,8 @@ const styles = StyleSheet.create({
   },
   priceSelect: {
     flexDirection: "row",
-    alignItems: "center"
+    alignItems: "center",
+    marginRight: 20
   },
   fabButton: {
     position: 'absolute',

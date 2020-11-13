@@ -1,91 +1,107 @@
-import React, { useState, useRef } from 'react';
-import { View, Text, Image, Modal } from 'react-native';
+import React, { useState, useRef, useEffect } from 'react';
+import { View, Text, Image, Modal, Pressable } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { FontAwesome, Feather } from '@expo/vector-icons';
 
-import { BorderlessButton, RectButton, ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
+import { RectButton, ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import { FAB, Checkbox, RadioButton } from 'react-native-paper';
 import { Modalize } from 'react-native-modalize'
 
 //components
 import styles from './styles';
+//import Checkbox from '../../actionComponents/Checkbox';
+
 //[TO DO] Consultar a api quando estiver pronta
 const data = {
   "group": [
     {
       "idGroup": 1,
       "title": "Preços",
-      "listOptions": [
-        {
-          "id": 1,
-          "titleOption": "Tamanho (P)",
-          "listTag": [{ "tagType": "gramas","tag": "100 g" }],
-          "price": 3.50,
-          "description": "Um prato de tamanho x"
-        },
-        {
-          "id": 2,
-          "titleOption": "Tamanho (M)",
-          "listTag": [{ "tagType": "gramas","tag": "200 g" }],
-          "price": 4.00,
-          "description": "Um prato de tamanho y"
-        },
-        {
-          "id": 3,
-          "titleOption": "Tamanho (G)",
-          "listTag": [{ "tagType": "gramas","tag": "300 g" }],
-          "price": 5.00,
-          "description": "Um prato de tamanho z"
-        }
-      ]
+      "qtdListOptions": 3
     },
     {
       "idGroup": 2,
       "title": "Temperos",
-      "listOptions": [
-        {
-          "id": 1,
-          "titleOption": "Pernil Assado",
-          "listTag": [{ "tagType": "gramas","tag": "50 g" }],
-          "price": 3.00,
-          "description": "Um pernil assado"
-        },
-        {
-          "id": 2,
-          "titleOption": "Escondidinho de carne",
-          "subtitleOption": "Purê de batata",
-          "listTag": [{ "tagType": "gramas","tag": "200 g" }],
-          "price": 4.00,
-          "description": "Um escondidinho normal"
-        }
-      ]
+      "qtdListOptions": 2
     },
     {
       "idGroup": 3,
       "title": "Acompanhamentos",
-      "listOptions": [
-        {
-          "id": 1,
-          "titleOption": "Arroz",
-          "listTag": [{ "tagType": "gramas","tag": "100 g" }],
-          "price": 3.00,
-          "description": "Um arroz no ponto"
-        },
-        {
-          "id": 2,
-          "titleOption": "Farofa",
-          "listTag": [{ "tagType": "gramas","tag": "200 g" }],
-          "price": 4.00,
-          "description": "Uma farofa legal"
-        },
-        {
-          "id": 3,
-          "titleOption": "Salada",
-          "listTag": [{ "tagType": "gramas", "tag": "300 g" }],
-          "price": 5.00,
-          "description": "Uma salada verde"
-        }
-      ]
+      "qtdListOptions": 3
+    }
+  ],
+  "options": [
+    {
+      "id": 1,
+      "titleOption": "Tamanho (P)",
+      "subtitleOption": "",
+      "listTag": [{ "tagType": "gramas","tag": "100 g" }],
+      "price": 3.50,
+      "description": "Um prato de tamanho x",
+      "group": 1
+    },
+    {
+      "id": 2,
+      "titleOption": "Tamanho (M)",
+      "subtitleOption": "",
+      "listTag": [{ "tagType": "gramas","tag": "200 g" }],
+      "price": 4.00,
+      "description": "Um prato de tamanho y",
+      "group": 1
+    },
+    {
+      "id": 3,
+      "titleOption": "Tamanho (G)",
+      "subtitleOption": "",
+      "listTag": [{ "tagType": "gramas","tag": "300 g" }],
+      "price": 5.00,
+      "description": "Um prato de tamanho z",
+      "group": 1
+    },
+    {
+      "id": 4,
+      "titleOption": "Pernil Assado",
+      "subtitleOption": "Purê de batata",
+      "listTag": [{ "tagType": "gramas","tag": "50 g" }],
+      "price": 3.00,
+      "description": "Um pernil assado",
+      "group": 2
+    },
+    {
+      "id": 5,
+      "titleOption": "Escondidinho de carne",
+      "subtitleOption": "Purê de batata",
+      "listTag": [{ "tagType": "gramas","tag": "200 g" }],
+      "price": 4.00,
+      "description": "Um escondidinho normal",
+      "group": 2
+    },
+    {
+      "id": 6,
+      "titleOption": "Arroz",
+      "subtitleOption": "",
+      "listTag": [{ "tagType": "gramas","tag": "100 g" }],
+      "price": 3.00,
+      "description": "Um arroz no ponto",
+      "group": 3
+    },
+    {
+      "id": 7,
+      "titleOption": "Farofa",
+      "subtitleOption": "",
+      "listTag": [{ "tagType": "gramas","tag": "200 g" }],
+      "price": 4.00,
+      "description": "Uma farofa legal",
+      "group": 3
+    },
+    {
+      "id": 8,
+      "titleOption": "Salada",
+      "subtitleOption": "",
+      "listTag": [{ "tagType": "gramas", "tag": "300 g" }],
+      "price": 5.00,
+      "description": "Uma salada verde",
+      "group": 3
     }
   ]
 }
@@ -93,27 +109,47 @@ const data = {
 interface Group {
   idGroup: number,
   title: string,
-  listOptions: options[]
+  qtdListOptions: number
 }
 
 interface options {
   id: number,
   titleOption: string,
+  subtitleOption: string,
   listTag: listTag[],
   price: number,
-  description: string
+  description: string,
+  group: number
 }
 
 interface listTag {
   tagType: string,
   tag: string,
 }
+interface stateCheckbox {
+  id: number,
+  isChecked: boolean,
+  name: string
+}
+const optionsState: stateCheckbox[] = [];
 
 const Dish = () => {
   const navigation = useNavigation();
 
-  const [isCheckedItemOption, setCheckedItemOption] = React.useState(false);
-  const [isCheckedDeliveryMethod, setCheckedDeliveryMethod] = React.useState('first');
+  useEffect(() => {
+    for(var i = 0; i < data.options.length; i++){
+      optionsState.push({
+        id: data.options[i].id,
+        isChecked: false,
+        name: "Checkbox" + data.options[i].id.toString()
+      });
+    };
+  }, []);
+
+  const [isCheckedDeliveryMethod, setCheckedDeliveryMethod] = useState('first');
+  const [isCheckedOption, setCheckedOption] = useState<stateCheckbox[]>();
+  const [totalOrder, setTotalOrder] = useState(0);
+  const [addForDetail, setAddForDetail] = useState(0);
 
   const [isModalOpen, setModalOpen] = useState(false);
   const [isModalDeliveryMethodOpen, setModalDeliveryMethod] = useState(false);
@@ -128,9 +164,43 @@ const Dish = () => {
     modalizeRef.current?.open();
   }
 
-  // const deliveryMethodOpen = () => {
-  //   modalizeDeliveryMethod.current?.open();
-  // }
+  const onModaDetailOpen = (id: number) => {
+    setAddForDetail(id);
+    setModalOpen(true);
+  }
+
+  useEffect(() => {
+    handleCheckOption(addForDetail);
+  }, [addForDetail]);
+
+  useEffect(() => {
+    setCheckedOption(optionsState);
+  }, []);
+
+  useEffect(() => {
+    //preços das opções confirmadas
+    let prices: number[] = [];
+    //map opçoes confirmadas
+    isCheckedOption?.map(option => {
+      //array de opções confirmadas
+      let item = data.options.find(o => o.id === option.id && option.isChecked === true);
+
+      if(item != undefined ){
+        //adicionando preços na lista
+        prices.push(item.price);
+      }
+    });
+
+    //somando preços da lista e setando no useState
+    setTotalOrder(prices.reduce((total, numero) => total + numero, 0));
+
+  }, [isCheckedOption]);
+
+  const handleCheckOption = (id: number) => {
+    if(isCheckedOption != undefined){
+      setCheckedOption(isCheckedOption.map(isCheckedOption => isCheckedOption.id === id ? {...isCheckedOption, isChecked: !isCheckedOption.isChecked} : isCheckedOption));
+    }
+  }
 
   return(
     <View style={styles.container}>
@@ -143,39 +213,42 @@ const Dish = () => {
               visible={isModalOpen}
               statusBarTranslucent={true}
               onRequestClose={()=>{setModalOpen(false)}} >
-              <View style={styles.containerModalBackground}>
-                <View style={styles.iconCloseWrapper}>
-                  <TouchableOpacity>
-                    <FontAwesome 
-                      onPress={() => {setModalOpen(false)}}
-                      name="close" 
-                      size={30} 
-                      color="white" />
-                  </TouchableOpacity>
-                  
-                </View>
-                <View style={styles.modalWrapper}>
-                  <View style={styles.modal}>
-                    <Image 
-                      style={styles.detailImage}
-                      source={{ uri: "https://cdn.wizard.com.br/wp-content/uploads/2020/04/03201951/como-falar-sobre-comidas-em-espanhol.jpg" }} />
+                <Pressable 
+                  style={styles.containerModalBackground}
+                  onPress={() => {setModalOpen(false)}}
+                  // android_ripple={{ color: '#aaa'}}
+                >
+                  <View style={styles.iconCloseWrapper}>
+                    <TouchableOpacity>
+                      <FontAwesome 
+                        onPress={() => {setModalOpen(false)}}
+                        name="close" 
+                        size={30} 
+                        color="white" />
+                    </TouchableOpacity>
                     
-                    <Text style={styles.detailTitle} >Meu prato</Text>
-                    <Text style={styles.detailPrice}>R$ 4,00</Text>
-                    <Text style={styles.detailDescription}>Um prato de tigre para tres trigos tristes, e blabalbalablbabla</Text>
-
-                    <RectButton
-                      rippleColor="#ddd"
-                      style={styles.detailButton}>
-                      <Text style={styles.labelDetailButton}>Adicionar ao pedido</Text>
-                    </RectButton>
-                      
                   </View>
-                </View>
-                
-              </View>
-            </Modal>
+                  <View style={styles.modalWrapper}>
+                    <View style={styles.modal}>
+                      <Image
+                        style={styles.detailImage}
+                        source={{ uri: "https://cdn.wizard.com.br/wp-content/uploads/2020/04/03201951/como-falar-sobre-comidas-em-espanhol.jpg" }} />
+                      
+                      <Text style={styles.detailTitle} >Meu prato</Text>
+                      <Text style={styles.detailPrice}>R$ 4,00</Text>
+                      <Text style={styles.detailDescription}>Um prato de tigre para tres trigos tristes, e blabalbalablbabla</Text>
 
+                      <RectButton
+                        rippleColor="#ddd"
+                        style={styles.detailButton}
+                        onPress={() => {handleCheckOption(addForDetail)}}>
+                        <Text style={styles.labelDetailButton}>Adicionar ao pedido</Text>
+                      </RectButton>
+                        
+                    </View>
+                  </View>
+                </Pressable>              
+            </Modal>
             
             <Modal 
               animationType="fade"
@@ -253,7 +326,6 @@ const Dish = () => {
             </RectButton>
 
             { (data.group.length > 0) ?
-              
               data.group.map((item: Group) => {
                 return (
                   <View key={item.idGroup}>
@@ -270,16 +342,17 @@ const Dish = () => {
                       </View>
                     </View>
 
-                    { item.listOptions.map(option => {
-                      return (
-                        <RectButton
-                          key={option.id}
-                          style={styles.optionButton}
-                          rippleColor="#ddd"
-                          onPress={()=>{setModalOpen(true)}}>
+                    { data.options.map(option => {
+                      if(option.group === item.idGroup){
+                        return (
                           <View
+                            key={option.id}
                             style={styles.option}>
-                            <View>
+
+                            <TouchableOpacity
+                              style={styles.detailOption}
+                              onPress={() => {onModaDetailOpen(option.id)}} >
+
                               <Text style={styles.optionDescriptionTitle}>
                                 {option.titleOption}
                               </Text>
@@ -290,27 +363,23 @@ const Dish = () => {
                                   )
                                 })}
                               </View>
-                            </View>
+                            </TouchableOpacity>
                             <View style={styles.priceSelect}>
                               <Text style={styles.optionValue}>
                                 R$ {option.price.toPrecision(3)}
                               </Text>
                               <Checkbox
-                                status={isCheckedItemOption ? 'checked' : 'unchecked'}
-                                onPress={() => {
-                                  setCheckedItemOption(!isCheckedItemOption);
-                                }}
-                              />
+                                status={isCheckedOption?.find(o => o.id === option.id)?.isChecked ? 'checked' : 'unchecked'}
+                                onPress={() => {handleCheckOption(option.id)}} />
                             </View>
                           </View>
-                        </RectButton>
-                      )
+                        )
+                      }
                     })}
 
                   </View>
                 )
               })
-
               :
               <View> </View>
             }
@@ -345,19 +414,13 @@ const Dish = () => {
               <Feather name="shopping-bag" size={24} color="#cf2558" />
               <Text style={styles.headerModalizeText}>Meu pedido</Text>
             </View>
-            {/* <RectButton
-              rippleColor="#ddd"
-              style={styles.clearOrderButton}
-            >
-              <Text style={styles.clearOrderText}>Limpar</Text>
-            </RectButton> */}
           </View>
         }
         FloatingComponent={
           <View style={styles.modalFooter}>
             <View style={styles.containerFooter}>
               <Text style={styles.textFooter}>Total</Text>
-              <Text style={styles.textFooter}>R$ 25.00</Text>
+              <Text style={styles.textFooter}>R$ {totalOrder.toPrecision(3)}</Text>
             </View>
 
             <RectButton
@@ -372,35 +435,25 @@ const Dish = () => {
         }
       >
         <View>
-          <View style={styles.itemOrder}>
-            <View>
-              <Text style={styles.orderLabelText}>Tamanho (P)</Text>
-              <Text>100 g</Text>
-            </View>
-            <View>
-              <Text style={styles.orderLabelText}>R$ 3.50</Text>
-            </View>
-          </View>
-
-          <View style={styles.itemOrder}>
-            <View>
-              <Text style={styles.orderLabelText}>Farofa</Text>
-              <Text>100 g</Text>
-            </View>
-            <View>
-              <Text style={styles.orderLabelText}>R$ 3.50</Text>
-            </View>
-          </View>
-          
-          <View style={styles.itemOrder}>
-            <View>
-              <Text style={styles.orderLabelText}>Refrigerante</Text>
-              <Text>100 g</Text>
-            </View>
-            <View>
-              <Text style={styles.orderLabelText}>R$ 3.50</Text>
-            </View>
-          </View>
+          {isCheckedOption?.map(option => {
+            let item = data.options.find(o => o.id === option.id && option.isChecked === true);
+            
+            if(item?.price != undefined){
+              return(
+                <View
+                  key={item?.id}
+                  style={styles.itemOrder}>
+                  <View>
+                    <Text style={styles.orderLabelText}>{item?.titleOption}</Text>
+                    <Text>{item?.subtitleOption}</Text>
+                  </View>
+                  <View>
+                    <Text style={styles.orderLabelText}>R$ {item?.price.toPrecision(3)}</Text>
+                  </View>
+                </View>
+              );
+            }
+          })}
         </View>
       </Modalize>
       
