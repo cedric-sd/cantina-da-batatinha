@@ -1,9 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { View, Text, Image, Modal, Pressable } from 'react-native';
+import { View, Text, Image, Modal, Pressable, TouchableOpacity, FlatList, Animated } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { FontAwesome, Feather } from '@expo/vector-icons';
 
-import { RectButton, ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
+import { RectButton, ScrollView } from 'react-native-gesture-handler';
+import Swipeable from 'react-native-gesture-handler/Swipeable';
 import { FAB, Checkbox, RadioButton } from 'react-native-paper';
 import { Modalize } from 'react-native-modalize'
 
@@ -170,13 +171,10 @@ const Dish = () => {
   }
 
   useEffect(() => {
-    handleCheckOption(addForDetail);
-  }, [addForDetail]);
-
-  useEffect(() => {
     setCheckedOption(optionsState);
   }, []);
 
+  //efeito para adicionar na sacola
   useEffect(() => {
     //preços das opções confirmadas
     let prices: number[] = [];
@@ -202,10 +200,57 @@ const Dish = () => {
     }
   }
 
+  const handleRight = () => {
+    handleCheckOption(addForDetail);
+  }
+
+  const RightActions = (progress: any, dragx: any) => {
+
+    const scale = dragx.interpolate({
+      inputRange: [-100, 0],
+      outputRange: [1, 0],
+      extrapolate: 'clamp'
+    })
+
+    return (
+      <TouchableOpacity
+        onPress={handleRight}
+      >
+        <View style={styles.rightAction}>
+          <Animated.View style={[styles.actionView, { transform: [{ scale: scale }] }]}>
+            <Feather name="trash-2" size={30} color="#fff" />
+          </Animated.View>
+        </View>
+      </TouchableOpacity>
+    )
+  }
+
+  const handleDeliveryMethod = (deliveryMethod: string) => {
+    if(deliveryMethod === "first"){
+      return (
+        <View style={styles.containerMethods}>
+          <Feather name="truck" size={20} color="#aaa" />
+          <Text>Entrega</Text>
+          <Feather name="chevron-down" size={20} color="#cf2558" />
+        </View>
+      )
+    } else if (deliveryMethod === "second"){
+      return (
+        <View style={styles.containerMethods}>
+          <Feather name="map-pin" size={20} color="#aaa" />
+          <Text>Retirada</Text>
+          <Feather name="chevron-down" size={20} color="#cf2558" />
+        </View>
+      )
+    }
+    
+  }
+
   return(
     <View style={styles.container}>
       <ScrollView
-        showsVerticalScrollIndicator={false}>
+        showsVerticalScrollIndicator={false}
+        >
           <View>
 
             <Modal 
@@ -213,9 +258,9 @@ const Dish = () => {
               visible={isModalOpen}
               statusBarTranslucent={true}
               onRequestClose={()=>{setModalOpen(false)}} >
-                <Pressable 
+                <View 
                   style={styles.containerModalBackground}
-                  onPress={() => {setModalOpen(false)}}
+                  //onPress={() => {setModalOpen(false)}}
                   // android_ripple={{ color: '#aaa'}}
                 >
                   <View style={styles.iconCloseWrapper}>
@@ -229,25 +274,35 @@ const Dish = () => {
                     
                   </View>
                   <View style={styles.modalWrapper}>
-                    <View style={styles.modal}>
-                      <Image
-                        style={styles.detailImage}
-                        source={{ uri: "https://cdn.wizard.com.br/wp-content/uploads/2020/04/03201951/como-falar-sobre-comidas-em-espanhol.jpg" }} />
-                      
-                      <Text style={styles.detailTitle} >Meu prato</Text>
-                      <Text style={styles.detailPrice}>R$ 4,00</Text>
-                      <Text style={styles.detailDescription}>Um prato de tigre para tres trigos tristes, e blabalbalablbabla</Text>
-
-                      <RectButton
-                        rippleColor="#ddd"
-                        style={styles.detailButton}
-                        onPress={() => {handleCheckOption(addForDetail)}}>
-                        <Text style={styles.labelDetailButton}>Adicionar ao pedido</Text>
-                      </RectButton>
-                        
-                    </View>
+                    { data.options.length > 0 ?
+                        data.options.filter(o => o.id === addForDetail).map((option) => {
+                          return (
+                            <View 
+                              style={styles.modal}
+                              key={option.id}>
+                              <Image
+                                style={styles.detailImage}
+                                source={{ uri: "https://cdn.wizard.com.br/wp-content/uploads/2020/04/03201951/como-falar-sobre-comidas-em-espanhol.jpg" }} />
+                              
+                              <Text style={styles.detailTitle} >{option.titleOption}</Text>
+                              <Text style={styles.detailPrice}>R$ {option.price.toPrecision(3)}</Text>
+                              <Text style={styles.detailDescription}>{option.description}</Text>
+                            
+                              <TouchableOpacity
+                                //rippleColor="#ddd"
+                                style={styles.detailButton}
+                                onPress={() => {
+                                  handleCheckOption(option.id);
+                                  setModalOpen(false);
+                                  }}>
+                                <Text style={styles.labelDetailButton}>Alterar pedido</Text>
+                              </TouchableOpacity>
+                            </View>
+                          );
+                        }) : <View></View>
+                    }
                   </View>
-                </Pressable>              
+                </View>
             </Modal>
             
             <Modal 
@@ -318,11 +373,7 @@ const Dish = () => {
               rippleColor='#ddd'
               style={styles.buttonMethodDelivery}
               onPress={() => {setModalDeliveryMethod(true)}}>
-              <View style={styles.containerMethods}>
-                  <Feather name="truck" size={20} color="#aaa" />
-                  <Text>Entrega</Text>
-                  <Feather name="chevron-down" size={20} color="#cf2558" />
-              </View>
+              { handleDeliveryMethod(isCheckedDeliveryMethod) }
             </RectButton>
 
             { (data.group.length > 0) ?
@@ -383,8 +434,9 @@ const Dish = () => {
               :
               <View> </View>
             }
-        
         </View>
+        {/* gambiarra para prevenir o botao ficar por cima da opção*/}
+        <View style={{marginVertical: 50}}></View>
       </ScrollView>
       {/* <OptionDetail></OptionDetail> */}
       
@@ -428,8 +480,7 @@ const Dish = () => {
               style={styles.confirmOrderButton}
               onPress={handleConfirmOrder}
             >
-              <Text 
-                style={styles.labelConfirmOrderButton}>Confirmar pedido</Text>
+              <Text style={styles.labelConfirmOrderButton}>Confirmar pedido</Text>
             </RectButton>
           </View>
         }
@@ -440,17 +491,21 @@ const Dish = () => {
             
             if(item?.price != undefined){
               return(
-                <View
-                  key={item?.id}
-                  style={styles.itemOrder}>
-                  <View>
-                    <Text style={styles.orderLabelText}>{item?.titleOption}</Text>
-                    <Text>{item?.subtitleOption}</Text>
+                <Swipeable
+                  onSwipeableRightOpen={() => setAddForDetail(option.id)}
+                  renderRightActions={RightActions}
+                  key={item?.id}>
+                  <View
+                    style={styles.itemOrder}>
+                    <View>
+                      <Text style={styles.orderLabelText}>{item?.titleOption}</Text>
+                      <Text>{item?.subtitleOption}</Text>
+                    </View>
+                    <View>
+                      <Text style={styles.orderLabelText}>R$ {item?.price.toPrecision(3)}</Text>
+                    </View>
                   </View>
-                  <View>
-                    <Text style={styles.orderLabelText}>R$ {item?.price.toPrecision(3)}</Text>
-                  </View>
-                </View>
+                </Swipeable>
               );
             }
           })}

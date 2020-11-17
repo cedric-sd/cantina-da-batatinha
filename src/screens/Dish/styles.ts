@@ -50,7 +50,6 @@ const styles = StyleSheet.create({
   },
   detailOption: {
     padding: 20,
-    marginRight: '30%'
   },
   optionDescriptionTitle: {
     fontSize: 16,
@@ -291,7 +290,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "bold"
   },
-  
   confirmDeliveryMethod: {
     backgroundColor: '#cf2558',
     paddingVertical: 20,
@@ -305,6 +303,16 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold"
   },
+  //Swipeable bag
+  rightAction: {
+    backgroundColor: '#ff0000',
+    justifyContent: "center",
+  },
+  actionView: {
+    fontSize: 17,
+    color: '#fff',
+    padding: 20,
+  }
 });
 
 export default styles;
