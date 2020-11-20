@@ -28,23 +28,6 @@ const styles = StyleSheet.create({
     bottom: 0,
     backgroundColor: '#fff'
   },
-  //editar modal
-  addressWrapper: {
-    position: "absolute",
-    bottom: 0,
-    backgroundColor: '#fff'
-    
-  },
-  address: {
-    minWidth: '100%',
-    //minHeight: '70%',
-    
-    maxWidth: '100%',
-    maxHeight: '80%',
-    
-    paddingBottom: 20,
-    backgroundColor: '#fff'
-  },
   confirmAddress: {
     backgroundColor: '#cf2558',
     paddingVertical: 20,
@@ -58,21 +41,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold"
   },
-  formAddress: {
-    paddingTop: 20,
-    borderTopWidth: 1,
-    borderTopColor: '#ccc'
-  },
-  inlineNumberBairro: {
-    justifyContent: "space-evenly",
-    flexDirection: "row",
-    marginHorizontal: 40
-  },
-  input: {
-    marginHorizontal: 30,
-    marginVertical: 2,
-    height: 45
-  }
 });
 
 export default styles;

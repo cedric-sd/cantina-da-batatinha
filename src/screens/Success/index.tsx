@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, ImageBackground, Text, StatusBar } from 'react-native';
+import { View, ImageBackground, Text, StatusBar, Linking } from 'react-native';
 import LottieView from 'lottie-react-native';
 
 import styles from './styles';
@@ -8,6 +8,14 @@ import { RectButton } from 'react-native-gesture-handler';
 const backgroundImg = { uri: "https://github.com/cedric-sd/cantina-da-batatinha/blob/main/src/assets/images/background.png?raw=true" };
 
 const Success = () => {
+
+  const handleLinkToWhatsapp = () => {
+    //[TO DO] consultar dados da api
+
+    //[TO DO] disparar um chat automático para o cliente
+    Linking.openURL(`whatsapp://send?phone=5511223344&text=testandoAppDaCantina`)
+  }
+
   return (
     <View style={styles.container}>
       <StatusBar 
@@ -27,6 +35,7 @@ const Success = () => {
           <RectButton
             rippleColor="#b6ebce"
             style={styles.buttonFinish}
+            onPress={handleLinkToWhatsapp}
           >
             <Text style={styles.labelButton}>Acompanhe o pedido pelo whatsapp</Text>
           </RectButton>

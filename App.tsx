@@ -7,7 +7,7 @@ import Routes from './src/Routes';
 
 const theme = {
   ...DefaultTheme,
-  roundness: 2,
+  roundness: 8,
   colors: {
     ...DefaultTheme.colors,
     accent: '#cf2558',

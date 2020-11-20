@@ -23,7 +23,6 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
     margin: 20,
     borderRadius: 40,
-    elevation: 7,
     alignItems:"center",
   },
   labelDataButton: {
@@ -33,7 +32,7 @@ const styles = StyleSheet.create({
   },
   addressWrapper: {
     marginHorizontal: 30,
-    paddingVertical: 20,
+    paddingVertical: 10,
     borderBottomWidth: 1,
     borderBottomColor: '#ccc',
   },
@@ -43,19 +42,33 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginVertical: 5,
   },
-  containerButtonAddress: {
-    borderWidth: 2,
-    borderColor: "#fc7d4a",
-    borderRadius: 10,
-    marginVertical: 10,
+  containerAddress: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingTop: 10,
+    borderTopWidth: 1,
+    borderTopColor: '#ccc',
+    marginTop: 10
   },
-  addressButton: {
-    paddingVertical: 15,
-    alignItems:"center",
+  labelSwitch: {
+    color: "#cf2558",
+    fontSize: 16,
+    fontWeight: "bold"
   },
-  labelAddress: {
-    color: '#e25923'
-  }
+  confirmAddress: {
+    backgroundColor: '#cf2558',
+    paddingVertical: 20,
+    margin: 20,
+    borderRadius: 40,
+    elevation: 7,
+    alignItems:"center"
+  },
+  labelAddressButton: {
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: "bold"
+  },
 });
 
 export default styles;
