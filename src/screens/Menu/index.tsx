@@ -89,20 +89,23 @@ interface IThematic {
 }
 
 const Menu = () => {
-  const [search, setSearch] = useState('');
+//   const [search, setSearch] = useState('');
   const [Temathics, setThematics] = useState(req);
-  //[TO DO] use state para modificar cardapios que aparecem na tela
+//   //[TO DO] use state para modificar cardapios que aparecem na tela
   
-  useEffect(() => {
-    if(search) {
-      let params;
-      Temathics.thematic.map((t) => {
-        // params = {...t.dish.filter(o => o.title.match(`/.*${search}.*/`)?.copyWithin)};
-        // setThematics(params);
-      });
-    }
-    //[TO DO] Fazer um requisição das tematicas
-  }, [search])
+//   useEffect(() => {
+//     if(search) {
+//       let params;
+//       const regex = /.*search.*/;
+//       Temathics.thematic.map((t) => {
+//         params = t.dish.find(o => o.title.match(/.*search.*/)?.copyWithin);
+//         console.log(params);
+//         console.log(search);
+//         // setThematics(params);
+//       });
+//     }
+//     //[TO DO] Fazer um requisição das tematicas
+//   }, [search])
 
   return (
     <View style={styles.container}>
@@ -113,7 +116,7 @@ const Menu = () => {
           barStyle={'dark-content'}
         />
 
-        <View
+        {/* <View
           style={styles.inputSearch} >
           <TextInput
             style={styles.inputSearchText}
@@ -125,7 +128,7 @@ const Menu = () => {
             name="search" 
             size={20} 
             color="gray" />
-        </View>
+        </View> */}
       </View>
 
       <View style={styles.dishTypesWrapper}>
