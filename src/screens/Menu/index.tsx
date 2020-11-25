@@ -91,21 +91,6 @@ interface IThematic {
 const Menu = () => {
 //   const [search, setSearch] = useState('');
   const [Temathics, setThematics] = useState(req);
-//   //[TO DO] use state para modificar cardapios que aparecem na tela
-  
-//   useEffect(() => {
-//     if(search) {
-//       let params;
-//       const regex = /.*search.*/;
-//       Temathics.thematic.map((t) => {
-//         params = t.dish.find(o => o.title.match(/.*search.*/)?.copyWithin);
-//         console.log(params);
-//         console.log(search);
-//         // setThematics(params);
-//       });
-//     }
-//     //[TO DO] Fazer um requisição das tematicas
-//   }, [search])
 
   return (
     <View style={styles.container}>
@@ -116,22 +101,9 @@ const Menu = () => {
           barStyle={'dark-content'}
         />
 
-        {/* <View
-          style={styles.inputSearch} >
-          <TextInput
-            style={styles.inputSearchText}
-            placeholder='O que está procurando?'
-            value={search}
-            onChangeText={text => setSearch(text)}
-          ></TextInput>
-          <FontAwesome5 
-            name="search" 
-            size={20} 
-            color="gray" />
-        </View> */}
       </View>
 
-      <View style={styles.dishTypesWrapper}>
+      {/* <View style={styles.dishTypesWrapper}>
         <View style={styles.dishType}>
           <View style={styles.dishTypeImage}>
             <FontAwesome5 name="hamburger" size={24} color="#cf2558" />
@@ -167,7 +139,7 @@ const Menu = () => {
             Favoritos
           </Text>
         </View>
-      </View>
+      </View> */}
       <ScrollView>
         {
           Temathics.thematic.map((theme) => {
